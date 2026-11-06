@@ -1,0 +1,46 @@
+.guzhenren-root { pointer-events:none; color:var(--dsw-alias-label-primary,#e9eeeb); font:14px/1.5 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+.guzhenren-root *, .gz-controls * { box-sizing:border-box; }
+.gz-controls { position:relative; width:fit-content; padding:6px 12px; pointer-events:auto; z-index:30; color:#e9eeeb; }
+.gz-controls button { font:inherit; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.gz-controls button:focus-visible { outline:2px solid #b7d6d1; outline-offset:4px; }
+.gz-trigger { border:1px solid #c3d4ce30; border-radius:12px; background:rgba(22,35,39,.94); box-shadow:0 8px 28px #0003; padding:8px 12px 8px 8px; display:flex; align-items:center; gap:12px; color:#dbe7e3; }
+.gz-trigger:hover { border-color:#b7d6d1a0; }
+.gz-seal { display:grid; place-items:center; border:1px solid #adc3b96b; width:26px; height:30px; color:#c8d9d1; font:18px "Songti SC",SimSun,serif; border-radius:3px; }
+.gz-panel { position:absolute; left:12px; bottom:62px; width:344px; max-height:calc(100dvh - 110px); overflow-y:auto; background:rgba(22,32,36,.98); border:1px solid #c6d6cf38; border-radius:18px; padding:22px; box-shadow:0 18px 70px #0008; animation:gz-panel-in .2s ease-out; }
+.gz-panel-header { display:flex; justify-content:space-between; align-items:start; margin-bottom:20px; }
+.gz-panel-header small { color:#9aada7; font-size:10px; letter-spacing:2px; }
+.gz-panel h2 { font:24px "Songti SC",SimSun,serif; letter-spacing:3px; margin:8px 0 0; color:#ecf1ea; }
+.gz-close { background:transparent; border:0; color:#bdcbc5; width:30px; height:30px; font-size:26px!important; border-radius:8px; }
+.gz-close:hover { background:#ffffff10; }
+.gz-scenes { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-bottom:18px; }
+.gz-scene { height:124px; border:1px solid #ffffff20; border-radius:10px; background-size:cover; padding:12px; display:flex; flex-direction:column; justify-content:end; align-items:start; color:white; position:relative; text-align:left; overflow:hidden; }
+.gz-scene[aria-pressed=true] { border:2px solid var(--gz-accent); padding:11px; }
+.gz-scene strong { font:19px "Songti SC",SimSun,serif; text-shadow:0 2px 8px #000; letter-spacing:2px; }
+.gz-scene small { color:#d1ddd8; font-size:10px; margin-top:3px; }
+.gz-scene-number { position:absolute; top:8px; right:10px; font:15px "Songti SC",SimSun,serif; opacity:.9; }
+.gz-setting { display:flex; align-items:center; justify-content:space-between; padding:13px 0; gap:12px; border-top:1px solid #ffffff0d; }
+.gz-setting strong { display:block; font-size:12px; font-weight:500; color:#e3e9e5; }
+.gz-setting small { display:block; color:#a0ada8; font-size:10px; margin-top:3px; }
+.gz-switch { flex:none; border:1px solid #ffffff20; border-radius:30px; width:36px; height:22px; background:#35423e; padding:3px; }
+.gz-switch span { display:block; width:14px; height:14px; background:#c5d0cb; border-radius:50%; transition:transform .2s; }
+.gz-switch[aria-checked=true] { background:#8aaea5; }
+.gz-switch[aria-checked=true] span { transform:translateX(13px); background:#132b25; }
+.gz-panel-footer { color:#7f938b; font-size:9px; letter-spacing:1px; margin-top:12px; }
+.gz-reduced { color:#d8be8c; font-size:11px; }
+.gz-particles { position:fixed; inset:0; overflow:hidden; pointer-events:none!important; opacity:.65; }
+.gz-particles[data-reading=true] { opacity:.2; }
+.gz-particles i { position:absolute; left:var(--x); top:-12%; width:var(--size); height:var(--size); border-radius:50%; background:#d5e9e4; box-shadow:0 0 12px #badfd6; animation:gz-drift var(--duration) linear var(--delay) infinite; opacity:0; }
+.gz-particles[data-effect=snow] i { background:#edf8ff; box-shadow:0 0 8px #c0e6ff; }
+.gz-particles[data-effect=embers] i { background:#e0c393; box-shadow:0 0 10px #ebca90; animation-direction:reverse; }
+.gz-particles[data-effect=leaves] i { width:5px; height:9px; border-radius:0 90%; background:#b9cba4; box-shadow:none; }
+.gz-particles[data-moving=false] i,.gz-particles[data-moving=false] .gz-mist { animation-play-state:paused; visibility:hidden; }
+.gz-mist { position:absolute; left:-20%; bottom:-10%; width:140%; height:35%; background:radial-gradient(ellipse at 35% 80%,#dbe8dd25,transparent 65%); filter:blur(25px); animation:gz-mist 26s ease-in-out infinite alternate; }
+@keyframes gz-drift { 0% { transform:translate3d(0,-10vh,0) rotate(0);opacity:0; } 15% { opacity:.65; } 80% { opacity:.4; } 100% { transform:translate3d(8vw,120vh,0) rotate(160deg);opacity:0; } }
+@keyframes gz-mist { to { transform:translateX(12%) scaleY(1.2);opacity:.5; } }
+@keyframes gz-breathe { from { transform:scale(1); } to { transform:scale(1.035) translateX(.6%); } }
+@keyframes gz-panel-in { from { opacity:0;transform:translateY(6px); } to { opacity:1;transform:none; } }
+@media(max-width:600px) { .gz-controls { padding:6px 12px; } .gz-panel { width:min(344px,calc(100vw - 24px));padding:18px; } .gz-trigger { padding:6px 10px; } }
+@media(prefers-reduced-motion:reduce) { .gz-particles { display:none; } .gz-panel,.gz-switch span { animation:none;transition:none; } body:has(.guzhenren-root)::before { animation:none!important; } }
+
+/* 复用头像旁的侧栏操作位，不占额外高度。 */
+.gz-controls--compact{padding:0;z-index:30}.gz-controls--compact .gz-trigger{padding:0;width:32px;height:32px;justify-content:center;border:0;box-shadow:none;background:transparent}.gz-controls--compact .gz-seal{border:0;width:28px;height:28px}.gz-controls--compact .gz-trigger>span:not(.gz-seal){display:none}.gz-controls--compact .gz-panel{position:fixed;left:12px;bottom:64px}
